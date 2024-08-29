@@ -1,0 +1,3 @@
+/target
+# Ignore .env files for sensitive data
+.env
