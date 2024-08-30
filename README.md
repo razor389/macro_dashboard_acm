@@ -1,4 +1,3 @@
-```markdown
 # Macro Dashboard ACM
 
 This project is a Rust-based backend service designed to provide macroeconomic data through various API endpoints, such as current inflation rates, T-bill rates, and real T-bill yields. The backend is implemented using the Warp web framework and includes logging capabilities using `env_logger` and `log`.
@@ -124,4 +123,3 @@ This project is licensed under the MIT License. See the LICENSE file for details
 ## Contributing
 
 Feel free to submit issues and pull requests. Contributions are welcome!
-```
