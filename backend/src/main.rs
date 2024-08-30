@@ -3,6 +3,7 @@ mod services;
 mod routes;
 use env_logger;
 use log::{info, error};
+use warp::Filter;
 
 #[tokio::main]
 async fn main() {
@@ -10,9 +11,15 @@ async fn main() {
     env_logger::init(); 
     info!("Logger initialized. Starting the application...");
 
-    // Set up the routes
-    let api = routes::routes();
-    info!("Routes configured successfully.");
+    // Set up CORS
+    let cors = warp::cors()
+        .allow_any_origin()
+        .allow_header("content-type")
+        .allow_methods(vec!["GET", "POST", "PUT", "DELETE"]);
+
+    // Set up the routes with CORS
+    let api = routes::routes().with(cors);
+    info!("Routes configured successfully with CORS.");
 
     // Start the Warp server
     info!("Starting the Warp server on http://127.0.0.1:3030");
@@ -22,4 +29,3 @@ async fn main() {
 
     info!("Server shut down gracefully.");
 }
-

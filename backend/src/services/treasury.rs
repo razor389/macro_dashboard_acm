@@ -26,7 +26,7 @@ pub async fn fetch_tbill_data() -> Result<f64, Box<dyn Error>> {
     
     // Define selectors for table rows and the specific td element
     let row_selector = Selector::parse("table.views-table tbody tr").unwrap();
-    let cell_selector = Selector::parse("td.views-field-field-br-round-b1-yield-52wk-2").unwrap();
+    let cell_selector = Selector::parse("td.views-field-field-br-round-b1-yield-4wk-2").unwrap();
     
     let mut last_valid_rate: Option<f64> = None;
 
