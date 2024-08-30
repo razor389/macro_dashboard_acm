@@ -6,7 +6,11 @@ function Inflation() {
 
   useEffect(() => {
     axios.get('http://localhost:3030/api/v1/inflation')
-      .then(response => setInflation(response.data))
+      .then(response => {
+        // Assuming response.data is a number
+        const formattedInflation = response.data.toFixed(2);
+        setInflation(formattedInflation);
+      })
       .catch(error => console.error('Error fetching inflation data:', error));
   }, []);
 

@@ -12,7 +12,7 @@ function TBill() {
 
   return (
     <div>
-      <h2>Current T-Bill Rate</h2>
+      <h2>Current (Nominal) 4wk T-Bill Yield</h2>
       {tbill !== null ? <p>{tbill}%</p> : <p>Loading...</p>}
     </div>
   );
