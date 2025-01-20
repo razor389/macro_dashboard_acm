@@ -1,3 +1,4 @@
+use log::{info, error};
 // backend/src/handlers/long_term.rs
 use warp::reply::Json;
 use warp::Rejection;
@@ -23,8 +24,32 @@ pub struct LongTermRates {
 
 pub async fn get_long_term_rates() -> Result<Json, Rejection> {
     // Fetch all required rates
-    let bond_yield = fetch_20y_bond_yield().await.map_err(|_| warp::reject::not_found())?;
-    let tips_yield = fetch_20y_tips_yield().await.map_err(|_| warp::reject::not_found())?;
+    let bond_yield = match fetch_20y_bond_yield().await {
+        Ok(y) => {
+            info!("Nominal 20y yield is: {}", y);
+            y
+        },
+        Err(e) => {
+            error!("Nominal 20y  yield error: {}", e);
+            return Err(warp::reject::not_found());
+        }
+    };
+    
+    let tips_yield = match fetch_20y_tips_yield().await {
+        Ok(y) => {
+            info!("20y TIPS yield is: {}", y);
+            y
+        },
+        Err(e) => {
+            error!("20y TIPS yield error: {}", e);
+            // If you want the route to fail entirely, keep returning the error:
+            //return Err(warp::reject::not_found());
+            
+            // Or if you want to skip TIPS:
+            0.0
+        }
+    };
+    
     let real_tbill = fetch_tbill_data().await.map_err(|_| warp::reject::not_found())?;
     
     // Calculate derived values
