@@ -7,6 +7,7 @@ use std::fmt;
 use log::{info, error};  // Import the logging macros
 
 #[derive(Deserialize, Debug)]
+#[allow(non_snake_case, dead_code)]
 struct BlsResponse {
     status: String,
     Results: Results,
@@ -18,6 +19,7 @@ struct Results {
 }
 
 #[derive(Deserialize, Debug)]
+#[allow(non_snake_case, dead_code)]
 struct Series {
     seriesID: String,
     data: Vec<DataPoint>,

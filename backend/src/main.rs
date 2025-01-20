@@ -2,7 +2,7 @@ mod handlers;
 mod services;
 mod routes;
 use env_logger;
-use log::{info, error};
+use log::info;
 use warp::Filter;
 
 #[tokio::main]
